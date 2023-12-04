@@ -1,0 +1,9 @@
+EmployeeId,EmployeeName,EmployeeTitle,EmployeeHireDate,EmployeeCity,EmployeePostalCode,EmployeePhone,IsCurrent,StartDate,EndDate
+1,Andrew Adams,General Manager,2002-08-14 00:00:00,Edmonton,T5K 2N1,+1 (780) 428-9482,,2023-12-03 15:45:36,
+2,Nancy Edwards,Sales Manager,2002-05-01 00:00:00,Calgary,T2P 2T3,+1 (403) 262-3443,,2023-12-03 15:45:36,
+3,Jane Peacock,Sales Support Agent,2002-04-01 00:00:00,Calgary,T2P 5M5,+1 (403) 262-3443,,2023-12-03 15:45:36,
+4,Margaret Park,Sales Support Agent,2003-05-03 00:00:00,Calgary,T2P 5G3,+1 (403) 263-4423,,2023-12-03 15:45:36,
+5,Steve Johnson,Sales Support Agent,2003-10-17 00:00:00,Calgary,T3B 1Y7,1 (780) 836-9987,,2023-12-03 15:45:36,
+6,Michael Mitchell,IT Manager,2003-10-17 00:00:00,Calgary,T3B 0C5,+1 (403) 246-9887,,2023-12-03 15:45:36,
+7,Robert King,IT Staff,2004-01-02 00:00:00,Lethbridge,T1K 5N8,+1 (403) 456-9986,,2023-12-03 15:45:36,
+8,Laura Callahan,IT Staff,2004-03-04 00:00:00,Lethbridge,T1H 1Y8,+1 (403) 467-3351,,2023-12-03 15:45:36,
