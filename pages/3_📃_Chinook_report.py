@@ -390,7 +390,7 @@ if slt_br == br_options[8]:
     query_avg = Query.query_9_avg%top_k
 
     req_9_last = Query.req_9_last.head(top_k)
-    req_9_avg = Query.req_9_avg(top_k)
+    req_9_avg = Query.req_9_avg.head(top_k)
 
     # filter = st.checkbox('Do you want to sort data by number of days?')
     # if filter:
