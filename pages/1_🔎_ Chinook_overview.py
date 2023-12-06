@@ -7,11 +7,7 @@ from PIL import Image
 st.set_page_config(layout="wide")
 st.title("Chinook Dataset Overview")
 
-st.markdown(
-    r'''The Chinook data model represents a digital media store, including tables for artists, albums, media tracks, invoices, and customers. Details about purchases of music products from :red[2009 to 2013].
-Media-related data was created using real data from an :red[Apple iTunes library]. Customer and employee information was created using fictitious names and addresses that can be located on Google maps, and other well formatted data (phone, fax, email, etc. Sales information was auto generated using random data for a four year period between 2009-2013.
-'''
-)
+
 Album = '''
 - Description: Contains information about music albums.
 - Number of Rows: 347
@@ -167,10 +163,22 @@ dataframes = {
     "PlaylistTrack": playlisttrack,
     "Track": track,
 }
-tables = st.selectbox(placeholder='Select table to see information',label='The Chinook sample database includes: ',
-                      options=dataframes.keys(), index=None)
-if tables == None:
-    st.warning("Choose a table above to view information")
-else:
-    st.markdown(dataframes[tables])
+
+col1, col2 = st.columns([1,2], gap='large')
+with col1:
+    st.markdown(
+        r'''The Chinook data model represents a digital media store, including tables for artists, albums, media tracks, invoices, and customers. Details about purchases of music products from :red[2009 to 2013].
+
+Media-related data was created using real data from an :red[Apple iTunes library]. Customer and employee information was created using fictitious names and addresses that can be located on Google maps, and other well formatted data (phone, fax, email, etc. 
+
+Sales information was auto generated using random data for a four year period between 2009-2013.
+    '''
+    )
+with col2:
+    tables = st.selectbox(placeholder='Select table to see information',label='The Chinook sample database includes: ',
+                        options=dataframes.keys(), index=None)
+    if tables == None:
+        st.warning("Choose a table above to view information")
+    else:
+        st.markdown(dataframes[tables]) 
 st.divider()

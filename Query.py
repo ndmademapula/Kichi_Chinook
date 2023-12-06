@@ -2,6 +2,18 @@ import pandas as pd
 from constant import *
 
 # Track sales per day, month, quarter, year?
+
+
+ex_1 = '''The store's sales performance over the span of five years showcases varying trends. In 2009, the store recorded 454 invoices, resulting in total sales of 449.46. However, the following year, 2010, marked a notable upturn with 455 invoices and a substantial increase in total sales, reaching 481.45. This surge propelled the store to the top rank in sales performance. Despite a slight decline in total sales in 2011, down to 442, the total sales remained relatively robust at 469.58. The trend continued upwards in 2012, when the store experienced a rise in both the number of invoices (447) and total sales (477.53). However, by 2013, the number of invoices had reverted to 442, resulting in a decline in total sales to 450.58. This fluctuation in sales over the years indicates a varied trend in the store's performance, with notable highs and a subsequent decline in sales figures.
+The store can formulate appropriate strategies regarding staffing, products, incentives, and well-targeted advertising and communication campaigns to navigate these fluctuations more effectively.
+'''
+
+ex_2 = '''The quarterly breakdown of sales reveals distinct patterns across the four quarters. Quarter 2 emerges as the standout period, boasting the highest sales performance among the quarters, marked by 566 invoices and total sales amounting to 592.34, securing the top position in sales rank. Following closely, Quarter 3 presents a strong performance with 560 invoices and 584.40 in total sales. Quarter 1, recording 558 invoices and 583.42 in total sales, while Quarter 4, with 556 invoices and 568.44 in total sales, exhibited a relatively lower sales performance among the quarters.'''
+
+ex_3 = '''The breakdown of sales by month presents varying performances throughout the year. January emerged as the top-performing month, with 188 invoices totalling 201.12 in sales, securing the first rank in sales. June closely followed with 190 invoices and 201.1 in sales, claiming the second spot. April demonstrated a strong performance as well, with 186 invoices and 198.14 in sales, ranking third among the months. Meanwhile, February, November, and December displayed relatively lower sales performances, ranking towards the bottom with fewer invoices and lower total sales figures.
+Implementing marketing campaigns during months with higher revenue can significantly enhance business effectiveness. Specifically, months like January, April, and June have shown substantial revenue. Focusing marketing efforts during these periods can attract customer attention and increase sales opportunities. By optimizing campaigns during these motivated buying periods, the store can leverage these revenue surges to achieve higher effectiveness from the marketing strategy.
+'''
+
 query_1_quarter = '''select Quarter, Year, 
     sum(ExtendedPrice) as 'Total Sales'
     from star.FactSales as fs
@@ -47,6 +59,11 @@ req_1_year = pd.merge(df_FactSales, df_DimDate, left_on='InvoiceDateID', right_o
 req_1_year = req_1_year.groupby(['Year']).agg({'ExtendedPrice': 'sum'}).reset_index().rename(columns={'ExtendedPrice':'Total Sales'})
 
 #  Which album has the most listeners?
+
+ex_2_1 = '''Rock seems to dominate the engagement metrics, with several albums accumulating high listen counts, such as "Greatest Hits," "Chronicle," and "The Best Of" compilations. Latin and Alternative & Punk also maintain a significant presence in the engagement numbers, with albums like "Acústico," "International Superhits," and various compilations receiving notable listens.
+TV show soundtracks, especially from "Lost" and "The Office," have garnered substantial engagement, indicating the popularity of their music within these series. Additionally, albums from different genres, including Alternative & Punk, Metal have their own share of engagement across various albums.
+'''
+
 query_2 = '''select top %s 
     fl.AlbumId, 
         da.AlbumTitle, 
@@ -131,7 +148,9 @@ req_3_year = pd.merge(df_temp, df_DimCustomer, how='inner', on='CustomerId')
 req_3_year = req_3_year[['CustomerId', 'CustomerName', 'Year']].sort_values('CustomerId')
 
 #  Which customer spends the most money for buying album?
-# TODO: - check distinct InvoiceID, - đúng khum má
+ex_4_1 = '''These key customers form the backbone of the store's sales, highlighting their substantial contributions to its revenue stream. Understanding and nurturing these relationships becomes paramount. By offering tailored experiences, exclusive perks, or personalized incentives, the store can solidify these connections, potentially encouraging increased spending and long-term loyalty. Analyzing what drives their loyalty and applying similar strategies to other segments of the customer base could amplify overall sales. 
+Additionally, while these top customers hold significant value, diversification remains crucial. Exploring opportunities to attract new segments or expanding products and services can mitigate dependency on a handful of clients.
+'''
 query_4 = '''select top %s fs.CustomerId, 
     CustomerName, 
     count(InvoiceId) as 'Total No of invoices',
@@ -154,6 +173,9 @@ req_4 = req_4.sort_values('Total Sales', ascending=False)
 req_4
 
 #  Which employee helps achieve invoices the most?
+
+ex_5_1 = '''Among the three individuals in the Sales Support Agent department, Jane Peacock leads with a total invoice of 796 and total sales of 833.04, followed closely by Margaret Park with a total invoice of 760 and total sales of 775.40. Steve Johnson recorded a total invoice of 684 and total sales of 720.16. As for the remaining individuals in different departments—Andrew Adams, Laura Callahan, Michael Mitchell, Nancy Edwards, and Robert King—specific data for total invoices and sales aren't available'''
+
 query_5 = '''select de.EmployeeId, de.EmployeeName, count(InvoiceId) as 'Total Invoices'
 from star.FactSales as fs
 right join star.DimEmployee as de
@@ -217,6 +239,9 @@ req_5_year = pd.merge(df_temp, df_DimEmployee, how='inner', on='EmployeeId')
 req_5_year = req_5_year[['EmployeeId', 'EmployeeName', 'MonthOfYear', 'Year', 'Total_Invoices', 'Total_Sales']].sort_values(['EmployeeId', 'MonthOfYear', 'Year'])
 
 #  Which employee has the highest sales revenue?
+
+ex_6 = '''From 2009 to 2013, Margaret Park consistently secured a prominent spot as the top sales-generating employee for three out of these five years. Her sales performance remained strong, peaking in 2012 with a total of $197.2. Jane Peacock held the top position twice during these years, notably in 2011 and 2013, indicating a consistent contribution to sales. Steve Johnson consistently ranked third across these years, showing a stable performance but falling slightly behind Park and Peacock in terms of overall sales. And for each year, the productivity of employees will vary, based on which the store will have appropriate reward policies to encourage them.'''
+
 query_6 = '''select de.EmployeeId, de.EmployeeName, sum(fs.ExtendedPrice) as Total_Sales
 from star.FactSales as fs
 right join star.DimEmployee as de
@@ -277,6 +302,11 @@ req_6_year = pd.merge(df_temp, df_DimEmployee, how='inner', on='EmployeeId')
 req_6_year = req_6_year[['EmployeeId', 'EmployeeName', 'MonthOfYear', 'Year', 'Total_Sales']].sort_values(['EmployeeId', 'MonthOfYear', 'Year'])
 
 #  Which music genre is purchased the most by year?
+
+ex_7 = '''Rock consistently maintains its leading position in the quantity of sales each year, demonstrating its enduring popularity. Latin music remains a strong contender in the market, consistently securing a notable rank over the years. From 2009 to 2010, the genre Alternative & Punk dropped from the third position to the fourth position, while Heavy Metal and Hip Hop/Rap experienced more significant declines from positions eight to ten through seventeen. These shifts might reflect changing consumer preferences or an increased attraction towards other genres during that period. 
+These fluctuations suggest a dynamic music landscape where certain genres maintain their stronghold while others experience shifts in popularity, likely influenced by evolving consumer tastes, cultural influences, or the emergence of new musical trends. Understanding these trends can aid businesses in adapting their strategies to cater to changing consumer preferences and market dynamics.
+'''
+
 query_7_day = '''
 select GenreId, FullDate, count(fs.InvoiceId) as 'Total Invoices' , sum(SumPrice) as 'Total Sales'
 from star.FactGenre as fg
@@ -333,7 +363,32 @@ order by GenreId, Year'''
 req_7_year = df_temp.groupby(['GenreId', 'Year']).agg({'InvoiceId': 'count', 'SumPrice': 'sum'}).reset_index()
 req_7_year.rename(columns={'InvoiceId': 'Total Invoices', 'SumPrice': 'Total Sales'}, inplace=True)
 
-#!  How much gerne music in playlist?
+# Which country has the highest sales revenue, and how does this trend over time
+
+ex_8_1 = '''There are fluctuations in sales revenue across different countries and years. Some countries showcase consistent or increasing revenue trends over the years, while others display more erratic patterns with significant variations in sales from year to year. For instance, the USA maintained high sales figures consistently until a slight drop in 2013. Some countries experienced considerable changes in sales revenue between certain years, indicating potential fluctuations in market conditions or business strategies. 
+The data highlights varied sales performances across different countries, suggesting diverse market dynamics and potential areas for further analysis regarding market trends and business strategies in each specific region.
+'''
+
+query_8 = '''
+select dc.CustomerCountry, dd.Year, sum(fs.ExtendedPrice) as 'Total Sales'
+from star.FactSales as fs
+join star.DimCustomer as dc
+on dc.CustomerId = fs.CustomerId
+join star.DimDate as dd
+on dd.DateID = fs.InvoiceDateID
+group by dc.CustomerCountry, dd.Year
+order by 'Total Sales' desc'''
+
+req_8 = pd.merge(df_FactSales, df_DimCustomer, how='inner', on='CustomerId')
+req_8 = pd.merge(req_8, df_DimDate, how='inner', left_on='InvoiceDateID', right_on='DateID')
+
+# Group by 'CustomerCountry', 'Year', and calculate sum of 'ExtendedPrice'
+req_8 = req_8.groupby(['CustomerCountry', 'Year']).agg({'ExtendedPrice': 'sum'}).reset_index()
+req_8.rename(columns={'ExtendedPrice': 'Total Sales'}, inplace=True)
+
+# Sort the DataFrame by 'Total Sales' in descending order
+req_8.sort_values('Total Sales', ascending=False, inplace=True)
+
 #  How long does it take for customers to return to buy track?
 # TODO: đúng khum má?
 query_9_avg = '''select top %s 
@@ -375,4 +430,22 @@ df_temp = df_FactGenre_temp[df_FactGenre_temp['rn'] == 1][['CustomerId', 'OrderD
 req_9_last = pd.merge(df_temp, df_DimCustomer, how='inner', on='CustomerId')
 req_9_last = req_9_last[['CustomerName', 'OrderDateID', 'NumberOfDaysReturned']]
 
-#!  How much genre in playlist?
+# What is the total revenue generated by each genre?
+
+ex_10 = '''Notably, genres like Rock emerge as the top earners, boasting substantial total revenue figures surpassing $800. Following closely behind, Latin, Metal, and Alternative & Punk also demonstrate robust financial success, each exceeding the $200 mark in revenue. On a moderate scale, genres like TV Shows, Jazz, Blues, Drama, R&B/Soul and Classical present respectable revenue figures, ranging between $40 and $90. However, some categories such as Opera, Rock and Roll, and Easy Listening showcase comparatively lower total revenues, falling below $10. This comprehensive range of revenue figures across the entertainment spectrum signifies varying degrees of commercial success and market demand within each genre, illustrating the financial diversity and performance within these distinct entertainment segments.'''
+
+query_10 = '''select dg.GenreName, sum(fg.SumPrice) as 'Total Sales'
+from star.FactGenre as fg
+join star.DimGenre as dg
+on fg.GenreId = dg.GenreId
+group by dg.GenreName
+order by 'Total Sales' desc'''
+
+req_10 = pd.merge(df_FactGenre, df_DimGenre, how='inner', on='GenreId')
+
+# Group by 'GenreName' and calculate sum of 'SumPrice'
+req_10 = req_10.groupby('GenreName').agg({'SumPrice': 'sum'}).reset_index()
+req_10.rename(columns={'SumPrice': 'Total Sales'}, inplace=True)
+
+# Sort the DataFrame by 'Total Sales' in descending order
+req_10.sort_values('Total Sales', ascending=False, inplace=True)

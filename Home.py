@@ -14,15 +14,43 @@ The project unfolds through several key phases:
 
 - :red[Interactive Data App]: To enhance user accessibility and interaction, a user-friendly Interactive Data App is introduced. Utilizing the Streamlit framework, the app offers an intuitive and responsive environment, allowing users to navigate through various analyses and reports effortlessly.'''
 
-appreciation = ''''''
+appreciation = r'''
+We would like to express our sincere gratitude and appreciation to all those who have contributed to the completion of this Data warehouse and Integration subject. Your support, guidance, and assistance have been invaluable throughout this journey.
 
+First and foremost, we would like to thank our supervisor, MSc. Lê Bá Thiền, for your unwavering support and invaluable guidance. Your expertise and insights have been instrumental in shaping the direction of this project and ensuring its success.
+
+We are also deeply thankful to my colleagues and peers who provided valuable feedback, engaged in meaningful discussions, and offered their expertise whenever I needed it. Your input has enriched the quality of this work.
+
+Last but not least, we want to express my heartfelt thanks to my family and friends for their continuous encouragement and understanding during this endeavour. Your unwavering support kept me motivated and determined to see this project through.
+
+To everyone mentioned above and to anyone else who played a role, no matter how big or small, in the completion of this project, please accept my sincerest thanks.
+
+Love,
+
+:red[Group Gogi]
+'''
+mem_info = f'''
+
+| No. | Full name             | Student ID   |
+|----:|-----------------------|--------------|
+| 1   | Nguyễn Đinh Minh Anh  | K214162141   |
+| 2   | Phan Cao Bảo Trâm     | K214160996   |
+| 3   | Huỳnh Thị Kim Ngân    | K214160992   |
+| 4   | Lê Thị Bích Vân       | K214162159   |
+
+'''
 def main():
     st.set_page_config(layout="wide")
     st.title("Chinook")
-    st.subheader("Kichi's Data Warehouse and Intergration Final project")
-    st.markdown(introduction)
+    st.subheader("Gogi's Data Warehouse and Intergration Final project")
+    intro, mem, appre = st.tabs(['About', 'Members', 'Appreciation'])
+    with intro:
+        st.markdown(introduction)
+    with mem:
+        st.markdown(mem_info)
+    with appre:
+        st.markdown(appreciation)
     st.divider()
-    st.markdown(appreciation)
 
 if __name__ == "__main__":
     main()

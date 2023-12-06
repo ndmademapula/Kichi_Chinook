@@ -4,14 +4,12 @@ import pyodbc
 from PIL import Image
 from constant import *
 
-img_cube = Image.open(r'./Images/Cube.png')
-# img_cube = "https://raw.githubusercontent.com/ndmawpu/Chinook-Web-App/main/Cube.png"
+img_cube = Image.open(r'Images/Cube.png')
 st.image(img_cube, caption='Chinook Cube', output_format='PNG')
 col1, col2, col3 = st.columns(3)
 
 with col1: 
     img_cube = Image.open('Images/FactGenre_Cube.png')
-    # img_cube = "https://raw.githubusercontent.com/ndmawpu/Chinook-Web-App/main/Cube.png"
     st.image(img_cube, caption='Fact Genre Cube', use_column_width='auto')
 with col2: 
     img_cube = Image.open('Images/FactListen_Cube.png')
