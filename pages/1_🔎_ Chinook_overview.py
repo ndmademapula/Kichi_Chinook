@@ -164,7 +164,7 @@ dataframes = {
     "Track": track,
 }
 
-col1, col2 = st.columns([1,2], gap='large')
+col1, col2= st.columns([1,2], gap='large')
 with col1:
     st.markdown(
         r'''The Chinook data model represents a digital media store, including tables for artists, albums, media tracks, invoices, and customers. Details about purchases of music products from :red[2009 to 2013].
