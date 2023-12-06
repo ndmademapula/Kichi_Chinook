@@ -43,6 +43,7 @@ def main():
     st.set_page_config(layout="wide")
     st.title("Chinook")
     st.subheader("Gogi's Data Warehouse and Intergration Final project")
+    st.caption('This Web App is a Demo of Gogi group for Data Warehouse and Integration Course. By using Streamlit framework and connect to database in our local server and deploy it to Streamlit Cloud for global use, an interactive data web app for Chinook Digital Media Store have been created.')
     intro, mem, appre = st.tabs(['About', 'Members', 'Appreciation'])
     with intro:
         st.markdown(introduction)
